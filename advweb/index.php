@@ -1,71 +1,50 @@
 <?php 
 include 'db.php'; 
 include 'navbar.php'; 
-
-// Validar o ID recebido
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $id = $_GET['id'];
-    $sql = "SELECT * FROM books WHERE id = $id";
-    $result = mysqli_query($conn, $sql);
-    $book = mysqli_fetch_assoc($result);
-}
-
-if (!$book) {
-    echo "<div style='padding:20px;'><h2>Book not found!</h2><a href='index.php'>Go back</a></div>";
-    exit();
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo $book['title']; ?></title>
+    <title>Digital Bookstore - Home</title>
     <style>
-        .container { font-family: Arial, sans-serif; padding: 20px; max-width: 900px; margin: auto; }
-        .breadcrumb { margin-bottom: 20px; font-size: 0.9em; color: #666; }
-        .book-flex { display: flex; gap: 40px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .book-img img { width: 300px; border-radius: 5px; }
-        .metadata { background: #f8f9fa; padding: 15px; border-left: 5px solid #007bff; margin-top: 20px; }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .book-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+        .book-card { border: 1px solid #ddd; padding: 15px; width: 220px; text-align: center; border-radius: 8px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .book-card img { width: 100%; height: 280px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; }
+        .btn { background: #007bff; color: white; padding: 10px; text-decoration: none; border-radius: 5px; display: block; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="breadcrumb">
-        <a href="index.php" style="color:#007bff; text-decoration:none;">Home</a> > Details > <?php echo $book['title']; ?>
-    </div>
+    <h1 style="text-align:center;">Our Book Collection</h1>
 
-    <div class="book-flex">
-        <div class="book-img">
-            <?php 
-            $imagePath = "images/" . $book['image'];
-            if (!empty($book['image']) && file_exists($imagePath)) {
-                $displayImage = $imagePath;
-            } else {
-                $displayImage = "https://via.placeholder.com/300x450?text=Cover+Unavailable";
+    <div class="book-grid">
+        <?php
+        // Pega 4 livros aleatórios do seu banco
+        $sql = "SELECT * FROM books ORDER BY RAND() LIMIT 4";
+        $result = mysqli_query($conn, $sql);
+
+        if ($result && mysqli_num_rows($result) > 0) {
+            while($book = mysqli_fetch_assoc($result)) {
+                
+                // Caminho da imagem
+                $imagePath = "images/" . $book['image'];
+                $displayImage = (file_exists($imagePath) && !empty($book['image'])) ? $imagePath : "https://via.placeholder.com/200x300?text=No+Cover";
+
+                echo "<div class='book-card'>";
+                echo "<img src='$displayImage' alt='Book Cover'>";
+                echo "<h3>" . htmlspecialchars($book['title']) . "</h3>";
+                echo "<p>Author: " . htmlspecialchars($book['author']) . "</p>";
+                // Link para a página de detalhes
+                echo "<a href='book.php?id=" . $book['id'] . "' class='btn'>View Details</a>";
+                echo "</div>";
             }
-            ?>
-            <img src="<?php echo $displayImage; ?>" alt="Cover">
-        </div>
-
-        <div class="book-info">
-            <h1><?php echo $book['title']; ?></h1>
-            <h3>Author: <?php echo $book['author']; ?></h3>
-            <p><strong>Description:</strong></p>
-            <p><?php echo $book['description']; ?></p>
-
-            <div class="metadata">
-                <p><strong>System Metadata:</strong></p>
-                <ul>
-                    <li>Database ID: #<?php echo $book['id']; ?></li>
-                    <li>Reference: BOOK_DATA_<?php echo $book['id']; ?></li>
-                </ul>
-            </div>
-            <br>
-            <a href="index.php" style="text-decoration:none; color:#007bff;">← Back to list</a>
-        </div>
+        } else {
+            echo "<p style='text-align:center;'>No books found. Please check your database table 'books'.</p>";
+        }
+        ?>
     </div>
-</div>
 
 </body>
 </html>
