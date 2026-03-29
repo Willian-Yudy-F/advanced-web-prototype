@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['user'] = $user['name'];
         header("Location: index.php");
     } else {
-        echo "<p style='color: red;'>Email ou senha incorretos!</p>";
+        echo "<p style='color: red;'>Incorrect email or password.!</p>";
     }
 }
 ?>
