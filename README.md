@@ -1,24 +1,24 @@
-📚 Digital Bookstore - Advanced Web
-Este é um projeto de uma livraria digital desenvolvido para a disciplina de Advanced Web. A aplicação foca em fornecer uma interface dinâmica para exibição de livros, consumindo dados de um banco de dados MySQL via PHP, com um front-end responsivo.
+📚 Digital Bookstore - Advanced Web Project
+A dynamic, database-driven web application developed for the Advanced Web course. This project simulates a digital bookstore where books are dynamically fetched from a MySQL database and rendered with a modern, responsive UI.
 
 
-🚀 Funcionalidades
-• Exibição Dinâmica: Carregamento de livros diretamente do banco de dados.
-• Algoritmo de Seleção: Otimizado para exibir uma seleção aleatória de títulos na Home.
-• Interface Responsiva: Grid de livros adaptável a diferentes resoluções de tela.
-• Tratamento de Imagens: Sistema inteligente que verifica a existência da capa do livro no servidor antes da exibição.
+🚀 Key Features
+• Dynamic Data Fetching: Automatically retrieves and displays book information from a relational database.
+• Randomized Discovery: Implements a logic to fetch 4 random books on every refresh to enhance user discovery.
+• Asset Management: Includes a backend check to verify if book covers exist on the server before rendering, preventing broken image links.
+• Responsive Grid: A custom CSS Flexbox implementation for a seamless experience across desktop and mobile devices.
+• Secure Output: Data is sanitized using htmlspecialchars() to prevent Cross-Site Scripting (XSS) vulnerabilities.
 
 
-🛠️ Tecnologias Utilizadas
-O projeto foi construído utilizando as seguintes tecnologias:
-• PHP 8.x: Lógica de back-end e conexão com banco de dados.
-• MySQL: Armazenamento persistente de dados.
-• HTML5/CSS3: Estrutura e estilização moderna.
-• Flexbox: Para o layout da grade de produtos (book-grid).
+🛠️ Tech Stack
+• Backend: PHP 8.x
+• Database: MySQL
+• Frontend: HTML5, CSS3 (Flexbox)
+• Architecture: Modular design using PHP include for database connections and navigation components.
 
 
-💻 Estrutura do Código
-No arquivo principal (index.php), o projeto utiliza uma arquitetura modular:
-• Modularização: Inclusão de db.php e navbar.php para reaproveitamento de código e separação de responsabilidades.
-• Segurança: Utilização de htmlspecialchars() na exibição de dados para prevenir ataques de XSS.
-• Queries: Consultas SQL dinâmicas com verificação de integridade de resultados.
+📂 Project Structure
+• index.php: The main landing page containing the logic for the book grid.
+• db.php: Database connection configuration.
+• navbar.php: Reusable navigation component.
+• /images: Directory for book cover assets.
