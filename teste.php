@@ -2,22 +2,16 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-echo "<h2>Teste PHP</h2>";
+echo "<p>1 - Iniciando...</p>";
+
+session_start();
+echo "<p>2 - Sessão OK</p>";
 
 include 'db.php';
+echo "<p>3 - DB OK</p>";
 
-if ($conn) {
-    echo "<p style='color:green'>✅ Banco de dados conectado!</p>";
-} else {
-    echo "<p style='color:red'>❌ Erro de conexão: " . mysqli_connect_error() . "</p>";
-}
+include 'navbar.php';
+echo "<p>4 - Navbar OK</p>";
 
-echo "<p>PHP versão: " . phpversion() . "</p>";
-
-$result = mysqli_query($conn, "SHOW TABLES");
-echo "<p>Tabelas no banco:</p><ul>";
-while ($row = mysqli_fetch_array($result)) {
-    echo "<li>" . $row[0] . "</li>";
-}
-echo "</ul>";
+echo "<h2 style='color:green'>✅ Tudo funcionando!</h2>";
 ?>
