@@ -1,4 +1,4 @@
-/* Design inspirado no Booktopia */
+/* Design inspired by Booktopia */
 :root {
     --primary-color: #2563eb;
     --text-dark: #1e293b;
@@ -8,7 +8,7 @@
 
 body { font-family: 'Inter', sans-serif; background: var(--bg-light); color: var(--text-dark); }
 
-/* Grid de Livros Avançada  */
+/* Advanced Book Grid  */
 .book-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
