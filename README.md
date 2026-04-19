@@ -1,24 +1,61 @@
-📚 Digital Bookstore - Advanced Web Project
-A dynamic, database-driven web application developed for the Advanced Web course. This project simulates a digital bookstore where books are dynamically fetched from a MySQL database and rendered with a modern, responsive UI.
+# Digital Bookstore
 
+A web application for browsing and reviewing books, built with PHP and MySQL.
 
-🚀 Key Features
-• Dynamic Data Fetching: Automatically retrieves and displays book information from a relational database.
-• Randomized Discovery: Implements a logic to fetch 4 random books on every refresh to enhance user discovery.
-• Asset Management: Includes a backend check to verify if book covers exist on the server before rendering, preventing broken image links.
-• Responsive Grid: A custom CSS Flexbox implementation for a seamless experience across desktop and mobile devices.
-• Secure Output: Data is sanitized using htmlspecialchars() to prevent Cross-Site Scripting (XSS) vulnerabilities.
+## Technologies
+- PHP 8.2
+- MySQL
+- HTML5 / CSS3
+- XAMPP (local server)
 
+## Requirements
+- XAMPP (Apache + MySQL)
+- PHP 8.x
+- Web browser
 
-🛠️ Tech Stack
-• Backend: PHP 8.x
-• Database: MySQL
-• Frontend: HTML5, CSS3 (Flexbox)
-• Architecture: Modular design using PHP include for database connections and navigation components.
+## Installation
 
+1. Clone the repository:
+   git clone https://github.com/your-username/bookstore.git
 
-📂 Project Structure
-• index.php: The main landing page containing the logic for the book grid.
-• db.php: Database connection configuration.
-• navbar.php: Reusable navigation component.
-• /images: Directory for book cover assets.
+2. Move the project folder to XAMPP:
+   - Mac: /Applications/XAMPP/xamppfiles/htdocs/bookstore
+   - Windows: C:\xampp\htdocs\bookstore
+
+3. Import the database:
+   - Open http://localhost/phpmyadmin
+   - Create a database named advanced_web
+   - Click Import and select the file advanced_web.sql
+
+4. Configure the connection (db.php):
+   - host: localhost
+   - user: root
+   - password: (empty)
+   - database: advanced_web
+
+5. Access the project:
+   http://localhost/bookstore/index.php
+
+## Features
+- Home page with book listings
+- Category filtering by genre
+- Book detail page with description and metadata
+- Star rating system (1-5 stars)
+- User reviews
+- User registration and login
+- Favourites list
+- Search functionality
+- User account page
+
+## Project Structure
+- index.php — Home page
+- book.php — Book detail and reviews
+- login.php — User login
+- register.php — User registration
+- account.php — User account management
+- favorites.php — User favourites
+- search.php — Search results
+- navbar.php — Navigation menu
+- db.php — Database connection
+- style.css — Stylesheet
+- advanced_web.sql — Database export
