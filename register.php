@@ -23,13 +23,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Password must be at least 6 characters.";
     } else {
         // Check whether the username or email address is already in use
-        $check = mysqli_query($conn, "SELECT id FROM users WHERE username='$username' OR email='$email'");
+        $check = mysqli_query($conn, "SELECT id FROM users WHERE name='$username' OR email='$email'");
         if (mysqli_num_rows($check) > 0) {
             $error = "Username or email is already in use.";
         } else {
             // Encrypt the password before saving it to the database
             $hashed = password_hash($password, PASSWORD_DEFAULT);
-            $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashed')";
+            $sql = "INSERT INTO users (name, email, password) VALUES ('$username', '$email', '$hashed')";
             if (mysqli_query($conn, $sql)) {
                 header("Location: login.php");
                 exit();

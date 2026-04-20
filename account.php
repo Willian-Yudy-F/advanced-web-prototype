@@ -20,12 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Update your username and email address
         $newUser  = trim(mysqli_real_escape_string($conn, $_POST['username']));
         $newEmail = trim(mysqli_real_escape_string($conn, $_POST['email']));
-        $conflict = mysqli_query($conn, "SELECT id FROM users WHERE (username='$newUser' OR email='$newEmail') AND id != $uid");
+        $conflict = mysqli_query($conn, "SELECT id FROM users WHERE (name='$newUser' OR email='$newEmail') AND id != $uid");
         if (mysqli_num_rows($conflict) > 0) {
             $message = 'error:Username or email is already in use.';
         } else {
-            mysqli_query($conn, "UPDATE users SET username='$newUser', email='$newEmail' WHERE id=$uid");
-            $_SESSION['username'] = $newUser;
+            mysqli_query($conn, "UPDATE users SET name='$newUser', email='$newEmail' WHERE id=$uid");
+            $_SESSION['user'] = $newUser;
             $message = 'success:Profile updated successfully!';
         }
 
@@ -114,7 +114,7 @@ $reviews = mysqli_query($conn, "SELECT r.*, b.title AS book_title FROM reviews r
             <input type="hidden" name="action" value="update_profile">
             <div class="form-group">
                 <label>Username</label>
-                <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" required>
+                <input type="text" name="username" value="<?php echo htmlspecialchars($user['name']); ?>" required>
             </div>
             <div class="form-group">
                 <label>Email Address</label>
